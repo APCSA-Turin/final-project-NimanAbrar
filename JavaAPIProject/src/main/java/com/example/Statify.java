@@ -23,19 +23,14 @@ public class Statify {
     private final static String start_URL = "https://basketball-head.p.rapidapi.com/players/";
     private final static String end_URL_stats = "/stats/PerGame?seasonType=Regular";
 
-
-   public static String findPlayerId(JsonArray playerList, String playerName) {
-       for (int i = 0; i < playerList.size(); i++) {
-           JsonObject player = playerList.get(i).getAsJsonObject();
-           String fullName = player.get("firstName").getAsString().toLowerCase() + " " + player.get("lastName").getAsString().toLowerCase();
-
-
-           if (fullName.contains(playerName)) {
-               return player.get("playerId").getAsString();
-           }
-       }
-       return null;
-   }
+    //colors via https://www.w3schools.blog/ansi-colors-java
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN
+    public static final String YELLOW = "\033[0;33m";  // YELLOW
+    public static final String BLUE = "\033[0;34m";    // BLUE
+    public static final String PURPLE = "\033[0;35m";  // PURPLE
+    public static final String CYAN = "\033[0;36m";    // CYAN
+    public static final String RESET = "\033[0m";  // Text Reset
 
 
    public static String convertToId(String name) {
@@ -70,15 +65,15 @@ public class Statify {
     } if (stats.getPoints() >= 18) {
         output = " is a great scorer!";
     } if (stats.getPoints() >= 22) {
-        output = " is an excellent scorer!";
+        output = " is an " + GREEN + "excellent" + RESET + " scorer!";
     } if (stats.getPoints() >= 25) {
-        output = " is an ELITE scorer!";
+        output = " is an " + RED + "ELITE" + RESET + " scorer!";
     } if (stats.getPoints() >= 28) {
-        output = " is an UNHOLY scorer!";
+        output = " is an " + PURPLE + "UNHOLY" + RESET + " scorer!";
     } if (stats.getPoints() >= 30) {
-        output = " is a MYTHICAL scorer! You can't guard him!";
+        output = " is a " + YELLOW + "MYTHICAL" + RESET + " scorer! You can't guard him!";
     } else if (stats.getPoints() < 8) {
-        output = " is a poor scorer!";
+        output = " is a " + RED + "poor" + RESET + " scorer!";
     }
     return output;
    }
