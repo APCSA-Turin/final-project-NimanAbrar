@@ -71,12 +71,12 @@ public class PlayerStats {
    }
 
 
-   public double getTrueShooting() {
+   public double getTrueShooting() { //stat to calculate player efficiency
        double number = (pointsPerGame / (2 * (getFieldGoalsAttempted() + 0.44 * getFreeThrowsAttempted()))) * 100;
        return Math.round(number * 100.0) / 100.0;
    }
 
-   public double KOBE() {
+   public double KOBE() { //my own algorithm to calculate player impact via blending multiple stats
     double KOBE = (((pointsPerGame + 1.24 * (reboundsPerGame + assistsPerGame)) + Math.abs((2 * (blocksPerGame + stealsPerGame)) - 0.32 * turnoversPerGame))) * (getTrueShooting() * 0.08);
     return KOBE;
    }

@@ -18,18 +18,18 @@ public class API {
    public static String getData(String endpoint) throws Exception {
        URL url = new URL(endpoint);
        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-       connection.setRequestMethod("GET");
+       connection.setRequestMethod("GET");// send get request
 
 
-       connection.setRequestProperty("X-RapidAPI-Host", "basketball-head.p.rapidapi.com");
+       connection.setRequestProperty("X-RapidAPI-Host", "basketball-head.p.rapidapi.com"); //authentication headers to access api
        connection.setRequestProperty("X-RapidAPI-Key", "cab1efd48dmshb8932ee98bfee27p1e8946jsnd71d581238d3");
 
 
-       BufferedReader buff = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+       BufferedReader buff = new BufferedReader(new InputStreamReader(connection.getInputStream())); //reads api data
        String inputLine;
 
 
-       StringBuilder content = new StringBuilder();
+       StringBuilder content = new StringBuilder(); //stores data in a string
        while ((inputLine = buff.readLine()) != null) {
            content.append(inputLine);
        }
@@ -40,15 +40,15 @@ public class API {
 
 
    public static Player parsePlayer(String jsonResponse) {
-       Gson gson = new Gson();
-       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class);
+       Gson gson = new Gson(); //gson (external library) to read json data
+       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class); //convert data to object
 
 
-       JsonObject player = root.getAsJsonObject("body");
+       JsonObject player = root.getAsJsonObject("body"); //convert object to array
 
 
        String name = player.get("firstName").getAsString() + " " + player.get("lastName").getAsString();
-       String id = player.get("playerId").getAsString();
+       String id = player.get("playerId").getAsString(); //parse elements of the object and store it as a variable
   
        String position = player.get("positions").getAsString();
 

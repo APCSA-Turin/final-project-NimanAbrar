@@ -79,6 +79,8 @@
 
 #4 Output Example: 
 
+https://imgur.com/a/wUG5TD3
+
 #5 What I Learned
 
 -I learned how to connect to a public API

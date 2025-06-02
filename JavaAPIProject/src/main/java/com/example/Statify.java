@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Statify {
 
 
-    private final static String start_URL = "https://basketball-head.p.rapidapi.com/players/";
+    private final static String start_URL = "https://basketball-head.p.rapidapi.com/players/"; //url
     private final static String end_URL_stats = "/stats/PerGame?seasonType=Regular";
 
     //colors via https://www.w3schools.blog/ansi-colors-java
@@ -33,7 +33,7 @@ public class Statify {
     public static final String RESET = "\033[0m";  // Text Reset
 
 
-   public static String convertToId(String name) {
+   public static String convertToId(String name) {// convert to id with last name + first two letters of first name + number
        String urlName = "";
            int idx = name.indexOf(" ");
        String lastName = name.substring(idx+1);
@@ -48,6 +48,8 @@ public class Statify {
        return urlName;
    }
 
+
+
    public static String toCapitalize(String name) {
     name = name.toLowerCase().trim();
     int idx = name.indexOf(" ");
@@ -56,7 +58,7 @@ public class Statify {
     return toCap;
    }
 
-   public static String classifyScorer(PlayerStats stats) {
+   public static String classifyScorer(PlayerStats stats) { //classify scorer based on number of points
     String output = "";
     if (stats.getPoints() >= 8) {
         output = " is an average scorer!";
@@ -78,7 +80,7 @@ public class Statify {
     return output;
    }
 
-   public static int compare(PlayerStats firstPlayer, PlayerStats secondPlayer) {
+   public static int compare(PlayerStats firstPlayer, PlayerStats secondPlayer) { //calculates number of stats first player leads in
     int count = 0;
     if (firstPlayer.getPoints() >= secondPlayer.getPoints()) {
         count++;
@@ -119,44 +121,51 @@ public class Statify {
        String firstPlayer = "";
        String secondPlayer = "";
        while (play) {
-       System.out.println("Search Player Stats or Compare Two Players: (search/compare)");
+        while(true) {
+       System.out.println(YELLOW + "Search Player Stats or Compare Two Players: (search/compare)" + RESET);
        searchOrCompare = scan.nextLine().toLowerCase().trim();
+       if (searchOrCompare.contains("search") || searchOrCompare.contains("compare")) {
+        break;
+       }
+        }
        if (searchOrCompare.contains("search")) {
-        System.out.println("Search Player Stats: ");
+        System.out.println(RED + "Search Player Stats: " + RESET);
         playerName = scan.nextLine().toLowerCase().trim();
-       System.out.println("Career Stats/This Season Stats? (season/career)");
+        while (true) {
+       System.out.println(GREEN + "Career Stats/This Season Stats? (season/career)" + RESET);
        response = scan.nextLine().toLowerCase().trim();
+       if (response.contains("career") || response.contains("season")) {
+        break;
+       }
+        }
        if (response.contains("season")) {
            response = "season";
        } else if (response.contains("career")) {
            response = "career";
        }
     } else {
-        System.out.println("Select the first player to compare: ");
+        System.out.println(RED + "Select the first player to compare: " + RESET);
         firstPlayer = scan.nextLine().trim();
-        System.out.println("Select the second player to compare: ");
+        System.out.println(RED + "Select the second player to compare: " + RESET);
         secondPlayer = scan.nextLine().trim();
-        System.out.println("Career Stats/This Season Stats? (season/career)");
+        System.out.println(GREEN + "Career Stats/This Season Stats? (season/career)" + RESET);
+        while (true) {
         response = scan.nextLine().toLowerCase().trim();
+        if (response.contains("career") || response.contains("season")) {
+        break;
+       }
+    }
         if (response.contains("season")) {
             response = "season";
         } else if (response.contains("career")) {
             response = "career";
         }
     }
-
-
-       /*newName += playerName.substring(0,1).toUpperCase();
-       newName += playerName.substring(1, idx + 1);
-       newName += playerName.substring(idx + 1, idx + 2).toUpperCase();
-       newName += playerName.substring(idx+2); */
-
-
        try {
         if (searchOrCompare.equals("search")) {
            String matchedId = convertToId(playerName);
            if (matchedId != null) {
-               String playerStats = API.getData(start_URL + matchedId + end_URL_stats);
+                String playerStats = API.getData(start_URL + matchedId + end_URL_stats);
                if (response.equals("career")) {
                PlayerStats stats = API.parsePlayerCareerStats(playerStats);
                System.out.println("------------------------------------------");
@@ -164,7 +173,7 @@ public class Statify {
                System.out.println("------------------------------------------");
                System.out.println(stats);
                System.out.println("------------------------------------------");
-               System.out.println(playerName + classifyScorer(stats));
+               System.out.println(YELLOW + playerName + RESET + classifyScorer(stats));
                System.out.println("------------------------------------------");
                } else {
                    PlayerStats stats = API.parsePlayerSeasonStats(playerStats);
@@ -173,7 +182,7 @@ public class Statify {
                    System.out.println("------------------------------------------");
                System.out.println(stats);
                System.out.println("------------------------------------------");
-               System.out.println(playerName + classifyScorer(stats));
+               System.out.println(YELLOW + playerName + RESET + classifyScorer(stats));
                System.out.println("------------------------------------------");
                }
            } else {
@@ -198,11 +207,11 @@ public class Statify {
                 System.out.println(secondStat);
                 System.out.println("------------------------------------------");
                 if (compare(firstStat, secondStat) > 4) {
-                    System.out.println(firstPlayer + " leads in " + compare(firstStat, secondStat) + " statistical categories!");
+                    System.out.println(YELLOW + firstPlayer + RESET + " leads in " + GREEN + compare(firstStat, secondStat) + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
                 } else {
                     int num = 9 - compare(firstStat, secondStat);
-                    System.out.println(secondPlayer + " leads in " + num + " statistical categories!");
+                    System.out.println(YELLOW + secondPlayer + RESET + " leads in " + GREEN + num + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
                 }
             } else {
@@ -218,11 +227,11 @@ public class Statify {
                 System.out.println(secondStat);
                 System.out.println("------------------------------------------");
                 if (compare(firstStat, secondStat) > 4) {
-                    System.out.println(firstPlayer + " leads in " + compare(firstStat, secondStat) + " statistical categories!");
+                    System.out.println(YELLOW + firstPlayer + RESET + " leads in " + GREEN + compare(firstStat, secondStat) + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
                 } else {
                     int num = 9 - compare(firstStat, secondStat);
-                    System.out.println(secondPlayer + " leads in " + num + " statistical categories!");
+                    System.out.println(YELLOW + secondPlayer + RESET + " leads in " + GREEN + num + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
                 }
             }

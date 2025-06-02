@@ -5,17 +5,17 @@ public class Player {
    private String name;
    private String id;
    private String team;
-   private String position;
+   private String position; //instance variables
 
 
-   public Player(String name, String id, String position) {
+   public Player(String name, String id, String position) { //constructor
        this.name = name;
        this.id = id;
        this.position = position;
    }
 
 
-   public String getName() {
+   public String getName() { //getter variables
        return name;
    }
 
