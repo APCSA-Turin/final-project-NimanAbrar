@@ -58,16 +58,16 @@ public class API {
 
 
    public static PlayerStats parsePlayerCareerStats(String jsonResponse) {
-       Gson gson = new Gson();
-       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class);
+       Gson gson = new Gson(); //gson to parse data
+       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class); //convert data to object
 
 
-       JsonArray statsArray = root.getAsJsonArray("body");
+       JsonArray statsArray = root.getAsJsonArray("body"); //convert object to array
 
 
-       JsonObject statsData = statsArray.get(statsArray.size() - 1).getAsJsonObject();
+       JsonObject statsData = statsArray.get(statsArray.size() - 1).getAsJsonObject(); //convert array to object. last index of the array represents career stats
       
-       double ppg = statsData.get("pointsPerGame").getAsDouble();
+       double ppg = statsData.get("pointsPerGame").getAsDouble(); //parse certain sttas and store as a variable
        double rpg = statsData.get("defensiveReboundsPerGame").getAsDouble() + statsData.get("offensiveReboundsPerGame").getAsDouble();
        double apg = statsData.get("assistsPerGame").getAsDouble();
        double tov = statsData.get("turnoversPerGame").getAsDouble();
@@ -83,16 +83,16 @@ public class API {
 
 
    public static PlayerStats parsePlayerSeasonStats(String jsonResponse) {
-       Gson gson = new Gson();
-       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class);
+       Gson gson = new Gson(); //gson to parse data
+       JsonObject root = gson.fromJson(jsonResponse, JsonObject.class); //convert data to object
 
 
-       JsonArray statsArray = root.getAsJsonArray("body");
+       JsonArray statsArray = root.getAsJsonArray("body"); //convert object to array
 
 
-       JsonObject statsData = statsArray.get(statsArray.size() - 2).getAsJsonObject();
+       JsonObject statsData = statsArray.get(statsArray.size() - 2).getAsJsonObject(); //convert array back to object. 2nd to last index signifies last season's stats
       
-       double ppg = statsData.get("pointsPerGame").getAsDouble();
+       double ppg = statsData.get("pointsPerGame").getAsDouble(); //store each stat as variable
        double rpg = statsData.get("defensiveReboundsPerGame").getAsDouble() + statsData.get("offensiveReboundsPerGame").getAsDouble();
        double apg = statsData.get("assistsPerGame").getAsDouble();
        double tov = statsData.get("turnoversPerGame").getAsDouble();

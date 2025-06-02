@@ -122,7 +122,7 @@ public class Statify {
        String secondPlayer = "";
        while (play) {
         while(true) {
-       System.out.println(YELLOW + "Search Player Stats or Compare Two Players: (search/compare)" + RESET);
+       System.out.println(YELLOW + "Search Player Stats or Compare Two Players: (search/compare)" + RESET); //ask user input
        searchOrCompare = scan.nextLine().toLowerCase().trim();
        if (searchOrCompare.contains("search") || searchOrCompare.contains("compare")) {
         break;
@@ -168,7 +168,7 @@ public class Statify {
                 String playerStats = API.getData(start_URL + matchedId + end_URL_stats);
                if (response.equals("career")) {
                PlayerStats stats = API.parsePlayerCareerStats(playerStats);
-               System.out.println("------------------------------------------");
+               System.out.println("------------------------------------------"); //output stats
                System.out.println(playerName + "'s Stats: ");
                System.out.println("------------------------------------------");
                System.out.println(stats);
@@ -176,13 +176,13 @@ public class Statify {
                System.out.println(YELLOW + playerName + RESET + classifyScorer(stats));
                System.out.println("------------------------------------------");
                } else {
-                   PlayerStats stats = API.parsePlayerSeasonStats(playerStats);
+                   PlayerStats stats = API.parsePlayerSeasonStats(playerStats); //output stats
                    System.out.println("------------------------------------------");
                    System.out.println(playerName + "'s Stats: ");
                    System.out.println("------------------------------------------");
                System.out.println(stats);
                System.out.println("------------------------------------------");
-               System.out.println(YELLOW + playerName + RESET + classifyScorer(stats));
+               System.out.println(YELLOW + playerName + RESET + classifyScorer(stats)); 
                System.out.println("------------------------------------------");
                }
            } else {
@@ -195,9 +195,9 @@ public class Statify {
                 String firstStats = API.getData(start_URL + firstMatchedId + end_URL_stats);
                 String secondStats = API.getData(start_URL + secondMatchedId + end_URL_stats);
                 if (response.equals("career")) {
-                PlayerStats firstStat = API.parsePlayerCareerStats(firstStats);
-                System.out.println("------------------------------------------");
-                System.out.println(firstPlayer + "'s Stats: ");
+                PlayerStats firstStat = API.parsePlayerCareerStats(firstStats); 
+                System.out.println("------------------------------------------");//output stats
+                System.out.println(firstPlayer + "'s Stats: "); 
                 System.out.println("------------------------------------------");
                 System.out.println(firstStat);
                 System.out.println("------------------------------------------");
@@ -206,16 +206,16 @@ public class Statify {
                 System.out.println("------------------------------------------");
                 System.out.println(secondStat);
                 System.out.println("------------------------------------------");
-                if (compare(firstStat, secondStat) > 4) {
+                if (compare(firstStat, secondStat) > 4) { //output how many stats first player leads in
                     System.out.println(YELLOW + firstPlayer + RESET + " leads in " + GREEN + compare(firstStat, secondStat) + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
-                } else {
-                    int num = 9 - compare(firstStat, secondStat);
+                } else { //output how many stats second player leads in
+                    int num = 9 - compare(firstStat, secondStat); 
                     System.out.println(YELLOW + secondPlayer + RESET + " leads in " + GREEN + num + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
                 }
             } else {
-                PlayerStats firstStat = API.parsePlayerSeasonStats(firstStats);
+                PlayerStats firstStat = API.parsePlayerSeasonStats(firstStats); //output stats
                 System.out.println("------------------------------------------");
                 System.out.println(firstPlayer + "'s Stats");
                 System.out.println("------------------------------------------");
@@ -226,10 +226,10 @@ public class Statify {
                 System.out.println("------------------------------------------");
                 System.out.println(secondStat);
                 System.out.println("------------------------------------------");
-                if (compare(firstStat, secondStat) > 4) {
+                if (compare(firstStat, secondStat) > 4) { //output how many stats first player leads in
                     System.out.println(YELLOW + firstPlayer + RESET + " leads in " + GREEN + compare(firstStat, secondStat) + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
-                } else {
+                } else { //output how many stats second player leads in
                     int num = 9 - compare(firstStat, secondStat);
                     System.out.println(YELLOW + secondPlayer + RESET + " leads in " + GREEN + num + RESET + " statistical categories!");
                     System.out.println("------------------------------------------");
@@ -242,9 +242,9 @@ public class Statify {
        }
     
        String yesOrNo = "";
-       System.out.println("Would you like to continue? (yes/no)");
+       System.out.println("Would you like to continue? (yes/no)");//ask if user would like to play again
        yesOrNo = scan.nextLine().toLowerCase().trim();
-       if (yesOrNo.equals("no")) {
+       if (yesOrNo.equals("no")) { 
            play = false;
        }
    }

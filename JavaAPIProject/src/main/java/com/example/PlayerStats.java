@@ -10,11 +10,11 @@ public class PlayerStats {
    private double blocksPerGame;
    private double fieldGoalsAttempted;
    private double threePointersMade;
-   private double freeThrowsAttempted;
+   private double freeThrowsAttempted; //instance variables
 
 
    public PlayerStats(double points, double rebounds, double assists, double turnovers, double steals, double blocks, double fieldGoals, double threePointers, double freeThrows) {
-       pointsPerGame = points;
+       pointsPerGame = points; //constructor
        reboundsPerGame = rebounds;
        assistsPerGame = assists;
        turnoversPerGame = turnovers;
@@ -26,7 +26,7 @@ public class PlayerStats {
    }
 
 
-   public double getPoints() {
+   public double getPoints() { //getter methods
        return pointsPerGame;
    }
 
